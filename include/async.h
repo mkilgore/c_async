@@ -2,14 +2,15 @@
 #define INCLUDE_ASYNC_H
 
 #include <unistd.h>
-#include <ucontext.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+
+#include "us_ctx.h"
 #include "list.h"
 
 struct task_ctx {
-    ucontext_t context;
-    ucontext_t *sched;
+    struct us_ctx context;
+    struct us_ctx *sched;
     int fd;
     int events; /* Represents the event flags we're waiting for */
     struct sockaddr addr;

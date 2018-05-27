@@ -9,12 +9,6 @@
 
 #ifdef USE_MAKECONTEXT
 
-
-void us_init_ctx(struct us_ctx *ctx)
-{
-    getcontext(&ctx->context);
-}
-
 static __thread struct us_ctx *new_thread_ctx;
 static __thread ucontext_t *thread_creation_ctx;
 
@@ -37,6 +31,7 @@ void us_make_ctx(struct us_ctx *ctx, struct us_ctx *ret_ctx, void (*entry) (stru
     ctx->context.uc_stack.ss_size = len;
     ctx->context.uc_stack.ss_flags = 0;
 
+    getcontext(&ctx->context);
     makecontext(&ctx->context, us_makecontext_thread_start, 0);
 
     new_thread_ctx = ctx;
@@ -48,10 +43,6 @@ void us_make_ctx(struct us_ctx *ctx, struct us_ctx *ret_ctx, void (*entry) (stru
 void *us_get_stack(struct us_ctx *ctx)
 {
     return ctx->context.uc_stack.ss_sp;
-}
-
-void us_clear(struct us_ctx *ctx)
-{
 }
 
 void us_swapctx(struct us_ctx *old, struct us_ctx *new)

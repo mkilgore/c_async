@@ -1,7 +1,9 @@
 #ifndef INCLUDE_DEBUG_H
 #define INCLUDE_DEBUG_H
 
-#if 0
+#include "config.h"
+
+#ifdef DEBUG
 #include <stdio.h>
 
 #define dbg_printf(...) printf(__VA_ARGS__)

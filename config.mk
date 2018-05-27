@@ -1,7 +1,8 @@
 # Compiler settings
 CC      ?= cc
 CFLAGS  += -Wall -std=gnu99 \
-		   -D_GNU_SOURCE -Wno-unused-result
+		   -D_GNU_SOURCE -Wno-unused-result \
+		   -g
 LDFLAGS ?=
 LEX     ?= flex
 LFLAGS  ?=
